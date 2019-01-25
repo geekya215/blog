@@ -494,7 +494,7 @@ body {
 }
 @media (min-width: 1600px) {
   .container .header-inner {
-    width: 73%;
+    width: 60%;
   }
 }
 .main-inner {
@@ -508,7 +508,7 @@ body {
 }
 @media (min-width: 1600px) {
   .container .main-inner {
-    width: 73%;
+    width: 60%;
   }
 }
 .footer {
@@ -526,7 +526,7 @@ body {
 }
 @media (min-width: 1600px) {
   .container .footer-inner {
-    width: 73%;
+    width: 60%;
   }
 }
 pre,
@@ -1891,7 +1891,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #7d3e12;
+  background: #ffe591;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2536,7 +2536,7 @@ ul.breadcrumb li+li:last-child {
 }
 @media (min-width: 1600px) {
   .header {
-    width: 73%;
+    width: 60%;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
