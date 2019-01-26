@@ -1891,7 +1891,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e08b1f;
+  background: #86459e;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2733,7 +2733,8 @@ ul.breadcrumb li+li:last-child {
 .menu-item-active a,
 .menu .menu-item a:hover,
 .menu .menu-item span.exturl:hover {
-  background: #f9f9f9;
+/* default: #f9f9f9 */
+  background: #49b1f5;
   border-bottom-color: #fff;
 }
 .menu .menu-item {
@@ -3039,4 +3040,7 @@ body {
   border-color: #49b1f5;
   color: #fff;
   background: #49b1f5;
+}
+.menu-item-active a {
+  background: #49b1f5 !important;
 }
