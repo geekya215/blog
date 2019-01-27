@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.geekya215.com/2019/01/20/Test/</loc>
+    <loc>https://www.geekya215.com/posts/622c63cb/</loc>
     
-    <lastmod>2019-01-27T16:45:38.710Z</lastmod>
+    <lastmod>2019-01-27T20:34:16.018Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.geekya215.com/posts/4a17b156/</loc>
+    
+    <lastmod>2019-01-27T20:25:23.975Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>https://www.geekya215.com/tags/index.html</loc>
     
     <lastmod>2019-01-27T16:27:24.696Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.geekya215.com/2019/01/20/hello-world/</loc>
-    
-    <lastmod>2019-01-20T10:15:18.236Z</lastmod>
     
   </url>
   
