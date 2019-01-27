@@ -1,4 +1,4 @@
-Uer-agent: *
+User-agent: *
 Allow: /
 Allow: /archives/
 Allow: /tags/
