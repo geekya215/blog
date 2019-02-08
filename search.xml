@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[YES! FFMPEG!]]></title>
+    <url>%2Fposts%2F5373667d%2F</url>
+    <content type="text"><![CDATA[how do you edit video and audio? use gui application? why not try to use command line tool which named ffmpeg? merge two video file use ffmpeg(default setting) 1$ ffmpeg -i video.mp4 -i video.mp4 -codec out.mkv]]></content>
+      <categories>
+        <category>ffmpeg</category>
+      </categories>
+      <tags>
+        <tag>ffmpeg</tag>
+        <tag>audio</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Bitwise!]]></title>
     <url>%2Fposts%2F8f8f81fb%2F</url>
-    <content type="text"><![CDATA[Single Number Single Number II Single Number III $$lim_{1\to+\infty}P(|\frac{1}{n}\sum_i^nX_i-\mu|&lt;\epsilon)=1, i=1,…,n$$These three problems have normal method,but that may be use more time and space,Humm,why not use bit state? It’s a brilliant method!]]></content>
+    <content type="text"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;Similar problems LeetCode 136&nbsp;&nbsp;LeetCode 137&nbsp;&nbsp;LeetCode 260 about bit manipulation.we can use normal method to slove these three problems,but that may be have $O(n^2)$ time complexity or $O(n)$ space complexity,how can we optimize it? Humm,why not use bit state? It’s a brilliant method! In this way, we can get liner time complexity and without using extra space. Problem Igive you an array have a lot of number,every number apperance twice except one,find it. 12345678class Solution() &#123; int singleNumber(vector&lt;int&gt;&amp; nums) &#123; int ans = 0; for(int num:nums) ans ^= num; return ans; &#125;&#125; Time complexity:$O(n)$ Space complexity:$O(1)$ Problem IIgive you an array which every number appereance three times except one,find it. 1234567891011class Solution() &#123; int singleNumber(vector&lt;int&gt;&amp; nums) &#123; int a,b; a = b = 0; for(int num:nums) &#123; a = (num&amp;b) ^ num; b = (num&amp;a) ^ num; &#125; return b; &#125;&#125; Time complexity:$O(n)$ Space complexity:$O(1)$ Problem IIIgive you an array which every number appereance twice except two numbers,find them out. 12345678910111213141516class Solution() &#123; vector&lt;int&gt; singleNumber(vector&lt;int&gt;&amp; nums) &#123; vector&lt;int&gt; ans = &#123;0,0&#125;; int dif = 0; for(int num:nums) dif ^= num; for(int num:nums) &#123; if(num&amp;dif == 0) ans[0] ^= num; else ans[1] ^= num; &#125; return ans; &#125;&#125; Time complexity:$O(n)$ Space complexity:$O(1)$]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
