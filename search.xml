@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Euler function]]></title>
     <url>%2Fposts%2F60602a6d%2F</url>
-    <content type="text"><![CDATA[“$\phi(n)$” called Euler totient function is counted how many prime relative number in $[2,n]$ for n, we can inference a lot by this elementary formula. we can apply there to slove various number theroy simpley ever! Basicｔhree extension formula if $p$ is a prime number, we can get that$$\phi(p) = p -1$$ if $p^n$ is a prime power, we can get that$$\phi(p) = p^n-p^{n-1}$$ if $\gcd(a,b)=1$,it means a and b is prime relative, we can get that$$\phi(ab) = \phi(a)\phi(b)$$]]></content>
+    <content type="text"><![CDATA[“$\phi(n)$” called Euler totient function is counted how many prime relative number in $[2,n]$ for n, we can inference a lot by this elementary formula.that’s can apply there to slove various number theroy simpley ever! Basic three extension formula if $p$ is a prime number, we can get that$$\phi(p) = p -1$$ if $p^n$ is a prime power, we can get that$$\phi(p^n) = p^n-p^{n-1}$$ if $\gcd(a,b)=1$,it means a and b is prime relative, we can get that$$\phi(ab) = \phi(a)\phi(b)$$ Example $\phi(5) = 5 - 1 = 4$ $\phi(3^3) = \phi(27) = 3^3 - 3^{3-1} = 18$ $\phi(3*5) = \phi(15) = \phi(3)\phi(5) = (3-1)(5-1) = 8$]]></content>
       <categories>
         <category>Math</category>
       </categories>
