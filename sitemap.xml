@@ -1,60 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.geekya215.com/posts/60602a6d/</loc>
-    
-    <lastmod>2019-05-08T08:54:23.600Z</lastmod>
-    
+    <loc>https://geekya215.github.io/categories/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.geekya215.com/about/index.html</loc>
-    
-    <lastmod>2019-03-14T12:00:35.330Z</lastmod>
-    
+    <loc>https://geekya215.github.io/tags/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.geekya215.com/posts/d4ab5f5e/</loc>
-    
-    <lastmod>2019-03-02T08:04:52.346Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.geekya215.com/posts/5b825e54/</loc>
-    
-    <lastmod>2019-02-27T14:07:53.690Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.geekya215.com/posts/8f8f81fb/</loc>
-    
-    <lastmod>2019-02-26T09:40:11.846Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.geekya215.com/posts/281156b1/</loc>
-    
-    <lastmod>2019-01-31T16:41:22.464Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.geekya215.com/categories/index.html</loc>
-    
-    <lastmod>2019-01-27T16:28:12.773Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.geekya215.com/tags/index.html</loc>
-    
-    <lastmod>2019-01-27T16:27:24.696Z</lastmod>
-    
+    <loc>https://geekya215.github.io/</loc>
+    <priority>0</priority>
   </url>
   
 </urlset>
