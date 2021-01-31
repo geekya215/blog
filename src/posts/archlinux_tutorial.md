@@ -372,6 +372,8 @@ sleep 2
 ### 字体
 - **wqy-mircohei**
 - **nerd-fonts-hack**
+- **ttf-joypixels**
+- **ttf-symbola**
 
 **终端相关**
 - **alacritty**
@@ -385,6 +387,9 @@ sleep 2
 - **ueberzug**
 - **highlight**
 - **fzf**
+- **bc**
+- **mdp**
+- **ripgrep**
 
 ### 桌面显示
 - **feh**
