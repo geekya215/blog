@@ -19,7 +19,7 @@ export default {
                 "title": "Arch Linux 完全指北",
                 "link": "posts/archlinux_tutorial.html",
                 "date": "2021-01-19T00:00:00.000Z",
-                "updated": null,
+                "updated": "2021-01-31T03:54:42.000Z",
                 "author": "geekya215",
                 "contributors": [
                     "Lin Yang"
