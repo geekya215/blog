@@ -9,10 +9,9 @@ author: geekya215
 
 # Arch Linux 完全指北
 
-此文为博主自身在安装 Arch Linux 过程中的总结。主要参考 [Arch Wiki](https://wiki.archlinux.org/)，本文章具有一定时效性，里面的内容可能在以后的某个时间失效。
-如果遇到错误，请参考最新版本的官方文档，或通过通过网络寻求帮助。
+此文为博主自身在安装 Arch Linux 过程中的总结。主要参考 [Arch Wiki](https://wiki.archlinux.org/)，本文章具有一定时效性，里面的内容可能在以后的某个时间失效。如果遇到错误，请参考最新版本的官方文档，或通过网络寻求帮助。
 
-**本文默认安装单系统，有线网络环境，系统使用 UEFI 模式启动，禁用 Secure Boot。**
+**本文系统使用 UEFI 模式启动，禁用 Secure Boot。**
 
 ## 安装前准备
 
@@ -31,7 +30,10 @@ author: geekya215
 # ip link
 ```
 
-使用 `ping` 命令检查网络
+有线网络默认是连接状态，无线网络默认是未连接状态，需要通过 `iwd` 来连接
+> 使用 `iwctl` 进入交互环境后可以通过 `help` 命令来获得帮助
+
+完成网络配置后，使用 `ping` 命令检查网络是否连接成功
 ```
 # ping www.baidu.com
 ```
@@ -139,7 +141,7 @@ root分区|  /dev/sda3   | 磁盘剩余空间
 # locale-gen
 ```
 
-创建 `locale.conf` 并在文件中加入 `LANG=en_US.UTF-8`
+创建 `/etc/locale.conf` 并在文件中加入 `LANG=en_US.UTF-8`
 
 ### 网络配置
 
@@ -162,6 +164,11 @@ root分区|  /dev/sda3   | 磁盘剩余空间
 # systemctl start dhcpcd
 ```
 
+如果使用无线网络需要额外安装 `iwd`
+```
+# pacman -S iwd
+```
+
 ### 引导配置
 
 安装引导工具包以及 CPU 微码。微码需要根据自己使用的 CPU 来选择。Intel 用户安装 `intel-ucode`，AMD 用户安装 `amd-ucode`。
@@ -175,6 +182,20 @@ root分区|  /dev/sda3   | 磁盘剩余空间
 ```
 # grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 ```
+
+> 如果在已有 Windows 系统创建双系统引导需要增加完成以下步骤，单系统安装请忽略此段
+>
+> 安装 `os-prober`
+> ```
+> # pacman -S os-prober
+> ```
+>
+> 创建一个临时的挂载分区并将 Windows EFI 分区挂载1
+> ```
+> # mkdir /mnt2
+> # mount /dev/sdaX /mnt2
+> ```
+> 启动 `os-prober`
 
 生成主配置文件
 ```
@@ -249,6 +270,14 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 
 退出 root 账户，使用新创建的账户进入系统。
 
+## 字体配置
+
+由于后面有些软件需要字体支持这里先统一安装
+
+- `wqy-mircohei` - 中文字体支持
+- `nerd-fonts-hack` - 图标字体支持
+- `ttf-joypixels`， `ttf-symbola` - Neovim 某些插件特殊图标支持
+
 ## 图形环境配置
 
 安装 Xorg 相关组件
@@ -299,8 +328,8 @@ exec dwm
 ```
 
 如果希望登陆时自动 X，可以采用以下方式
-- 如果使用 Bash，编辑 `～/.bash_profile`
-- 如果使用 zsh，编辑 `～/.zprofile`
+- 如果使用 Bash，编辑 `~/.bash_profile`
+- 如果使用 zsh，编辑 `~/.zprofile`
 
 加入以下内容
 ```
@@ -312,6 +341,117 @@ fi
 启动 X
 ```
 $ startx
+```
+
+## 终端配置
+
+使用 `alacritty` 作为默认终端 
+```
+$ sudo pacman -S alacritty
+```
+配置文件模板位于 `/usr/share/doc/alacritty/example/alacritty.yml`， 可将其复制到 `~/.config/alacritty/alacritty.yml` 进行个性化配置
+
+对文件中以下几处进行修改
+```yaml
+# 启用真彩色
+env:
+  TREM: xterm-256color
+
+# 使用 Hack Nerd Font 作为终端字体
+font:
+  normal:
+    family: Hack Nerd Font
+    style: Regular
+
+# 配色使用 Snazzy 主题
+draw_bold_text_with_bright_colors: true
+
+colors:
+
+  primary:
+    background: '#282a36'
+    foreground: '#eff0eb'
+
+  cursor:
+    cursor: '#97979b'
+
+  selection:
+    text:       '#282a36'
+    background: '#feffff'
+
+  normal:
+    black:   '#282a36'
+    red:     '#ff5c57'
+    green:   '#5af78e'
+    yellow:  '#f3f99d'
+    blue:    '#57c7ff'
+    magenta: '#ff6ac1'
+    cyan:    '#9aedfe'
+    white:   '#f1f1f0'
+
+  bright:
+    black:   '#686868'
+    red:     '#ff5c57'
+    green:   '#5af78e'
+    yellow:  '#f3f99d'
+    blue:    '#57c7ff'
+    magenta: '#ff6ac1'
+    cyan:    '#9aedfe'
+    white:   '#eff0eb'
+```
+
+安装 `zsh`
+```
+$ sudo pacman -S zsh
+```
+
+将 `zsh` 设置为默认的 Shell
+```
+$ sudo chsh -s /bin/zsh
+```
+
+安装 `oh-my-zsh` (需要安装 `curl` 包)
+```
+$ sudo pacman -S curl
+$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+其他安装方式参见 [https://github.com/ohmyzsh/ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
+
+
+## 文件浏览器配置
+安装 `ranger`
+```
+$ sudo pacman -S ranger
+```
+
+使用以下命令在 `~/.config/ranger` 目录生成配置文件
+```
+$ ranger --copy-config=all
+```
+
+安装 `ueberzug` 实现图片预览
+```
+$ sudo pacman -S ueberzug
+```
+
+安装 `highlight` 实现文件预览语法高亮
+```
+$ sudo pacman -S highlight
+```
+
+安装 `ranger` 的图标插件
+```
+$ git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+$ echo "default_linemode devicons" >> $HOME/.config/ranger/rc.conf
+```
+
+编辑 `~/.config/ranger/rc.conf`
+```conf
+# 启用 git 状态显示
+set vcs_aware true
+# 启用图片预览
+set preview_images true
+set preview_images_method ueberzug
 ```
 
 ## 中文输入法配置
@@ -340,7 +480,7 @@ $ sudo pacman -S fcitx5-pinyin-zhwiki fcitx5-pinyin-moegirl
 ```
 $ sudo pacman -S fcitx5-configtool
 ```
-> fcitx5 的配置文件位于 `～/.config/fcitx5`，如果有需要可以手动编辑。
+> fcitx5 的配置文件位于 `~/.config/fcitx5`，如果有需要可以手动编辑。
 
 安装 fcitx5 的备选主题
 ```
@@ -348,7 +488,7 @@ $ sudo pacman -S fcitx5-material-color
 ```
 安装完成后可以在 fcitx5 的图形化配置界面更改主题
 
-配置 fcitx5 环境变量，在 `～/pam_environment` 文件中添加以下内容
+配置 fcitx5 环境变量，在 `~/pam_environment` 文件中添加以下内容
 ```
 GTK_IM_MODULE DEFAULT=fcitx
 QT_IM_MODULE  DEFAULT=fcitx
@@ -361,22 +501,17 @@ fcitx5 &
 sleep 2
 ```
 
-**fcitx5 在 IntelliJ 系列软件的 IDE 中会出现输入框位置不正确的错误，解决方式可参考以下链接**
+**fcitx5 在 IntelliJ 系列的 IDE 中会出现输入框位置不正确的错误，解决方式可参考以下链接**
 - [fcitx输入法在Intellij IDEA开发工具中输入法候选框无法跟随光标](https://bbs.archlinuxcn.org/viewtopic.php?pid=43982#p43982)
 - [intellij 系列的 ide 中输入框位置不正确](https://github.com/fcitx/fcitx5/issues/79)
 
+
 ## 软件包
 
-以下为我自己在使用 Arch Linux 系统中常用的软件包
-
-### 字体
-- **wqy-mircohei**
-- **nerd-fonts-hack**
-- **ttf-joypixels**
-- **ttf-symbola**
+以下为博主使用 Arch Linux 时常用的软件包
 
 **终端相关**
-- **alacritty**
+- **alacritty** 
 - **ranger**
 - **lazygit**
 - **lazydocker**
@@ -390,8 +525,11 @@ sleep 2
 - **bc**
 - **mdp**
 - **ripgrep**
+- **figlet**
+- **lolcat**
+- **tokei**
 
-### 桌面显示
+**桌面显示**
 - **feh**
 - **picom**
 
@@ -408,10 +546,11 @@ sleep 2
 - **discord**
 
 **其他**
+- **mpd**
+- **rofi**
 - **screenkey**
 - **albert**
 - **aria2**
 - **yay**
 - **trayer**
-
-以上某些软件包需要配置，具体的配置方法可参考 [dotfiles](https://github.com/geekya215/dotfiles)
+- **flameshot**
