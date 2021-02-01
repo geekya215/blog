@@ -9,9 +9,8 @@
       document.getElementById('prismTheme').href = "/assets/prism_tomorrow.css";
     }
   </script>
-</head><body><a class="czs-menu-l show_on_mobile aside_button_open" href="#" style="background-image:url(&quot;/assets/czs-menu-l.svg&quot;)"></a><a class="show_on_mobile aside_button_text" href="/">璃杏的博客</a><aside class="hide_on_mobile"><a class="czs-menu-l show_on_mobile aside_button_close" href="#" style="background-image:url(&quot;/assets/czs-close-l.svg&quot;)"></a><h1><a href="/">璃杏的博客</a></h1><p class="description">欢迎来到我的博客，这里搜集了我的技术文章和生活感悟，欢迎一起交流成长。</p><ul class="social list_style_none"><li class="flex_center"><a class="czs-github-logo" href="https://github.com/geekya215/blog" target="_blank" style="background-image:url(&quot;/assets/czs-github-logo.svg&quot;)"></a></li><li class="flex_center"><a class="czs-message-l" href="mailto:geekya215@gmail.com" target="_blank" style="background-image:url(&quot;/assets/czs-message-l.svg&quot;)"></a></li><li class="flex_center"><a class="czs-twitter" href="https://twitter.com/geekya215" target="_blank" style="background-image:url(&quot;/assets/czs-twitter.svg&quot;)"></a></li><li style="flex-grow:1"></li><li class="toggle_dark flex_center"><span class="czs-sun" style="background-image:url(&quot;/assets/czs-sun.svg&quot;)"></span><span class="czs-sun-l" style="background-image:url(&quot;/assets/czs-sun-l.svg&quot;)"></span><span class="czs-moon" style="background-image:url(&quot;/assets/czs-moon.svg&quot;)"></span><span class="czs-moon-l" style="background-image:url(&quot;/assets/czs-moon-l.svg&quot;)"></span></li></ul><nav><ul class="menu list_style_none"><li><a class="flex_center" href="/"><span class="czs-home-l" style="background-image:url(&quot;/assets/czs-home-l.svg&quot;)"></span>首页</a></li><li><a class="flex_center" href="/categories/"><span class="czs-category-l" style="background-image:url(&quot;/assets/czs-category-l.svg&quot;)"></span>分类</a></li><li><a class="flex_center" href="/tags/"><span class="czs-tag-l" style="background-image:url(&quot;/assets/czs-tag-l.svg&quot;)"></span>标签</a></li><li><a class="flex_center" href="/about/"><span class="czs-about-l" style="background-image:url(&quot;/assets/czs-about-l.svg&quot;)"></span>关于</a></li><li><a class="flex_center" href="/archives/"><span class="czs-box-l" style="background-image:url(&quot;/assets/czs-box-l.svg&quot;)"></span>归档</a></li></ul></nav></aside><section class="main"><h1>Arch Linux 完全指北</h1><div class="main_post_meta"><time dateTime="Tue Jan 19 2021 00:00:00 GMT+0000 (UTC)">2021-01-20</time> · <!-- -->geekya215</div><article><p>此文为博主自身在安装 Arch Linux 过程中的总结。主要参考 <a href="https://wiki.archlinux.org/">Arch Wiki</a>，本文章具有一定时效性，里面的内容可能在以后的某个时间失效。
-如果遇到错误，请参考最新版本的官方文档，或通过通过网络寻求帮助。</p>
-<p><strong>本文默认安装单系统，有线网络环境，系统使用 UEFI 模式启动，禁用 Secure Boot。</strong></p>
+</head><body><a class="czs-menu-l show_on_mobile aside_button_open" href="#" style="background-image:url(&quot;/assets/czs-menu-l.svg&quot;)"></a><a class="show_on_mobile aside_button_text" href="/">璃杏的博客</a><aside class="hide_on_mobile"><a class="czs-menu-l show_on_mobile aside_button_close" href="#" style="background-image:url(&quot;/assets/czs-close-l.svg&quot;)"></a><h1><a href="/">璃杏的博客</a></h1><p class="description">欢迎来到我的博客，这里搜集了我的技术文章和生活感悟，欢迎一起交流成长。</p><ul class="social list_style_none"><li class="flex_center"><a class="czs-github-logo" href="https://github.com/geekya215/blog" target="_blank" style="background-image:url(&quot;/assets/czs-github-logo.svg&quot;)"></a></li><li class="flex_center"><a class="czs-message-l" href="mailto:geekya215@gmail.com" target="_blank" style="background-image:url(&quot;/assets/czs-message-l.svg&quot;)"></a></li><li class="flex_center"><a class="czs-twitter" href="https://twitter.com/geekya215" target="_blank" style="background-image:url(&quot;/assets/czs-twitter.svg&quot;)"></a></li><li style="flex-grow:1"></li><li class="toggle_dark flex_center"><span class="czs-sun" style="background-image:url(&quot;/assets/czs-sun.svg&quot;)"></span><span class="czs-sun-l" style="background-image:url(&quot;/assets/czs-sun-l.svg&quot;)"></span><span class="czs-moon" style="background-image:url(&quot;/assets/czs-moon.svg&quot;)"></span><span class="czs-moon-l" style="background-image:url(&quot;/assets/czs-moon-l.svg&quot;)"></span></li></ul><nav><ul class="menu list_style_none"><li><a class="flex_center" href="/"><span class="czs-home-l" style="background-image:url(&quot;/assets/czs-home-l.svg&quot;)"></span>首页</a></li><li><a class="flex_center" href="/categories/"><span class="czs-category-l" style="background-image:url(&quot;/assets/czs-category-l.svg&quot;)"></span>分类</a></li><li><a class="flex_center" href="/tags/"><span class="czs-tag-l" style="background-image:url(&quot;/assets/czs-tag-l.svg&quot;)"></span>标签</a></li><li><a class="flex_center" href="/about/"><span class="czs-about-l" style="background-image:url(&quot;/assets/czs-about-l.svg&quot;)"></span>关于</a></li><li><a class="flex_center" href="/archives/"><span class="czs-box-l" style="background-image:url(&quot;/assets/czs-box-l.svg&quot;)"></span>归档</a></li></ul></nav></aside><section class="main"><h1>Arch Linux 完全指北</h1><div class="main_post_meta"><time dateTime="Tue Jan 19 2021 00:00:00 GMT+0000 (UTC)">2021-01-20</time> · <!-- -->geekya215</div><article><p>此文为博主自身在安装 Arch Linux 过程中的总结。主要参考 <a href="https://wiki.archlinux.org/">Arch Wiki</a>，本文章具有一定时效性，里面的内容可能在以后的某个时间失效。如果遇到错误，请参考最新版本的官方文档，或通过网络寻求帮助。</p>
+<p><strong>本文系统使用 UEFI 模式启动，禁用 Secure Boot。</strong></p>
 <h2 id="%E5%AE%89%E8%A3%85%E5%89%8D%E5%87%86%E5%A4%87">安装前准备<a class="anchor" href="#%E5%AE%89%E8%A3%85%E5%89%8D%E5%87%86%E5%A4%87">§</a></h2>
 <ul>
 <li>下载安装镜像，推荐使用国内清华大学镜像站（<a href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/">TUNA</a>），也可以通过 <a href="https://archlinux.org/download/">Arch 官方下载页面</a>，选择最符合自己网络状况的镜像站。</li>
@@ -23,7 +22,11 @@
 <p>进入环境后，检查网络接口</p>
 <pre class="language-autoit"><code class="language-autoit"># ip link
 </code></pre>
-<p>使用 <code>ping</code> 命令检查网络</p>
+<p>有线网络默认是连接状态，无线网络默认是未连接状态，需要通过 <code>iwd</code> 来连接</p>
+<blockquote>
+<p>使用 <code>iwctl</code> 进入交互环境后可以通过 <code>help</code> 命令来获得帮助</p>
+</blockquote>
+<p>完成网络配置后，使用 <code>ping</code> 命令检查网络是否连接成功</p>
 <pre class="language-autoit"><code class="language-autoit"># ping www<span class="token punctuation">.</span>baidu<span class="token punctuation">.</span>com
 </code></pre>
 <h3 id="%E5%90%8C%E6%AD%A5%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4">同步系统时间<a class="anchor" href="#%E5%90%8C%E6%AD%A5%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4">§</a></h3>
@@ -114,7 +117,7 @@
 <p>生成 locale 信息</p>
 <pre class="language-autoit"><code class="language-autoit"># locale<span class="token operator">-</span>gen
 </code></pre>
-<p>创建 <code>locale.conf</code> 并在文件中加入 <code>LANG=en_US.UTF-8</code></p>
+<p>创建 <code>/etc/locale.conf</code> 并在文件中加入 <code>LANG=en_US.UTF-8</code></p>
 <h3 id="%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE">网络配置<a class="anchor" href="#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE">§</a></h3>
 <p>设置主机名</p>
 <pre class="language-autoit"><code class="language-autoit"># echo hostname <span class="token operator">></span><span class="token operator">></span> <span class="token operator">/</span>etc<span class="token operator">/</span>hostname
@@ -129,6 +132,9 @@
 # systemctl enable dhcpcd
 # systemctl start dhcpcd
 </code></pre>
+<p>如果使用无线网络需要额外安装 <code>iwd</code></p>
+<pre class="language-autoit"><code class="language-autoit"># pacman <span class="token operator">-</span>S iwd
+</code></pre>
 <h3 id="%E5%BC%95%E5%AF%BC%E9%85%8D%E7%BD%AE">引导配置<a class="anchor" href="#%E5%BC%95%E5%AF%BC%E9%85%8D%E7%BD%AE">§</a></h3>
 <p>安装引导工具包以及 CPU 微码。微码需要根据自己使用的 CPU 来选择。Intel 用户安装 <code>intel-ucode</code>，AMD 用户安装 <code>amd-ucode</code>。</p>
 <pre class="language-autoit"><code class="language-autoit"># pacman <span class="token operator">-</span>S grub efibootmgr
@@ -137,6 +143,17 @@
 <p>安装 GRUB</p>
 <pre class="language-autoit"><code class="language-autoit"># grub<span class="token operator">-</span>install <span class="token operator">-</span><span class="token operator">-</span>target<span class="token operator">=</span>x86_64<span class="token operator">-</span>efi <span class="token operator">-</span><span class="token operator">-</span>efi<span class="token operator">-</span>directory<span class="token operator">=</span><span class="token operator">/</span>boot <span class="token operator">-</span><span class="token operator">-</span>bootloader<span class="token operator">-</span>id<span class="token operator">=</span>GRUB
 </code></pre>
+<blockquote>
+<p>如果在已有 Windows 系统创建双系统引导需要增加完成以下步骤，单系统安装请忽略此段</p>
+<p>安装 <code>os-prober</code></p>
+<pre class="language-autoit"><code class="language-autoit"># pacman <span class="token operator">-</span>S os<span class="token operator">-</span>prober
+</code></pre>
+<p>创建一个临时的挂载分区并将 Windows EFI 分区挂载1</p>
+<pre class="language-autoit"><code class="language-autoit"># mkdir <span class="token operator">/</span>mnt2
+# mount <span class="token operator">/</span>dev<span class="token operator">/</span>sdaX <span class="token operator">/</span>mnt2
+</code></pre>
+<p>启动 <code>os-prober</code></p>
+</blockquote>
 <p>生成主配置文件</p>
 <pre class="language-autoit"><code class="language-autoit"># grub<span class="token operator">-</span>mkconfig <span class="token operator">-</span>o <span class="token operator">/</span>boot<span class="token operator">/</span>grub<span class="token operator">/</span>grub<span class="token punctuation">.</span>cfg
 </code></pre>
@@ -182,6 +199,13 @@ Server <span class="token operator">=</span> https<span class="token punctuation
 <p>建议不要直接编辑 <code>sudoers</code> 文件，使用 <code>visudo</code> 命令完成编辑退出时会自动检测文件的格式，确保 <code>sudo</code> 命令能够正常运行，否则可能会导致不可预料的错误。</p>
 </blockquote>
 <p>退出 root 账户，使用新创建的账户进入系统。</p>
+<h2 id="%E5%AD%97%E4%BD%93%E9%85%8D%E7%BD%AE">字体配置<a class="anchor" href="#%E5%AD%97%E4%BD%93%E9%85%8D%E7%BD%AE">§</a></h2>
+<p>由于后面有些软件需要字体支持这里先统一安装</p>
+<ul>
+<li><code>wqy-mircohei</code> - 中文字体支持</li>
+<li><code>nerd-fonts-hack</code> - 图标字体支持</li>
+<li><code>ttf-joypixels</code>， <code>ttf-symbola</code> - Neovim 某些插件特殊图标支持</li>
+</ul>
 <h2 id="%E5%9B%BE%E5%BD%A2%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">图形环境配置<a class="anchor" href="#%E5%9B%BE%E5%BD%A2%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">§</a></h2>
 <p>安装 Xorg 相关组件</p>
 <pre class="language-autoit"><code class="language-autoit">$ sudo pacman <span class="token operator">-</span>S xorg
@@ -221,8 +245,8 @@ XINERAMAFLAGS <span class="token operator">=</span> <span class="token operator"
 </code></pre>
 <p>如果希望登陆时自动 X，可以采用以下方式</p>
 <ul>
-<li>如果使用 Bash，编辑 <code>～/.bash_profile</code></li>
-<li>如果使用 zsh，编辑 <code>～/.zprofile</code></li>
+<li>如果使用 Bash，编辑 <code>~/.bash_profile</code></li>
+<li>如果使用 zsh，编辑 <code>~/.zprofile</code></li>
 </ul>
 <p>加入以下内容</p>
 <pre class="language-autoit"><code class="language-autoit"><span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> ! <span class="token variable">$DISPLAY</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> <span class="token variable">$XDG_VTNR</span> <span class="token operator">-</span>eq <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token comment">; then</span>
@@ -231,6 +255,93 @@ fi
 </code></pre>
 <p>启动 X</p>
 <pre class="language-autoit"><code class="language-autoit">$ startx
+</code></pre>
+<h2 id="%E7%BB%88%E7%AB%AF%E9%85%8D%E7%BD%AE">终端配置<a class="anchor" href="#%E7%BB%88%E7%AB%AF%E9%85%8D%E7%BD%AE">§</a></h2>
+<p>使用 <code>alacritty</code> 作为默认终端</p>
+<pre class="language-autoit"><code class="language-autoit">$ sudo pacman <span class="token operator">-</span>S alacritty
+</code></pre>
+<p>配置文件模板位于 <code>/usr/share/doc/alacritty/example/alacritty.yml</code>， 可将其复制到 <code>~/.config/alacritty/alacritty.yml</code> 进行个性化配置</p>
+<p>对文件中以下几处进行修改</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token comment"># 启用真彩色</span>
+<span class="token key atrule">env</span><span class="token punctuation">:</span>
+  <span class="token key atrule">TREM</span><span class="token punctuation">:</span> xterm<span class="token punctuation">-</span>256color
+
+<span class="token comment"># 使用 Hack Nerd Font 作为终端字体</span>
+<span class="token key atrule">font</span><span class="token punctuation">:</span>
+  <span class="token key atrule">normal</span><span class="token punctuation">:</span>
+    <span class="token key atrule">family</span><span class="token punctuation">:</span> Hack Nerd Font
+    <span class="token key atrule">style</span><span class="token punctuation">:</span> Regular
+
+<span class="token comment"># 配色使用 Snazzy 主题</span>
+<span class="token key atrule">draw_bold_text_with_bright_colors</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+
+<span class="token key atrule">colors</span><span class="token punctuation">:</span>
+
+  <span class="token key atrule">primary</span><span class="token punctuation">:</span>
+    <span class="token key atrule">background</span><span class="token punctuation">:</span> <span class="token string">'#282a36'</span>
+    <span class="token key atrule">foreground</span><span class="token punctuation">:</span> <span class="token string">'#eff0eb'</span>
+
+  <span class="token key atrule">cursor</span><span class="token punctuation">:</span>
+    <span class="token key atrule">cursor</span><span class="token punctuation">:</span> <span class="token string">'#97979b'</span>
+
+  <span class="token key atrule">selection</span><span class="token punctuation">:</span>
+    <span class="token key atrule">text</span><span class="token punctuation">:</span>       <span class="token string">'#282a36'</span>
+    <span class="token key atrule">background</span><span class="token punctuation">:</span> <span class="token string">'#feffff'</span>
+
+  <span class="token key atrule">normal</span><span class="token punctuation">:</span>
+    <span class="token key atrule">black</span><span class="token punctuation">:</span>   <span class="token string">'#282a36'</span>
+    <span class="token key atrule">red</span><span class="token punctuation">:</span>     <span class="token string">'#ff5c57'</span>
+    <span class="token key atrule">green</span><span class="token punctuation">:</span>   <span class="token string">'#5af78e'</span>
+    <span class="token key atrule">yellow</span><span class="token punctuation">:</span>  <span class="token string">'#f3f99d'</span>
+    <span class="token key atrule">blue</span><span class="token punctuation">:</span>    <span class="token string">'#57c7ff'</span>
+    <span class="token key atrule">magenta</span><span class="token punctuation">:</span> <span class="token string">'#ff6ac1'</span>
+    <span class="token key atrule">cyan</span><span class="token punctuation">:</span>    <span class="token string">'#9aedfe'</span>
+    <span class="token key atrule">white</span><span class="token punctuation">:</span>   <span class="token string">'#f1f1f0'</span>
+
+  <span class="token key atrule">bright</span><span class="token punctuation">:</span>
+    <span class="token key atrule">black</span><span class="token punctuation">:</span>   <span class="token string">'#686868'</span>
+    <span class="token key atrule">red</span><span class="token punctuation">:</span>     <span class="token string">'#ff5c57'</span>
+    <span class="token key atrule">green</span><span class="token punctuation">:</span>   <span class="token string">'#5af78e'</span>
+    <span class="token key atrule">yellow</span><span class="token punctuation">:</span>  <span class="token string">'#f3f99d'</span>
+    <span class="token key atrule">blue</span><span class="token punctuation">:</span>    <span class="token string">'#57c7ff'</span>
+    <span class="token key atrule">magenta</span><span class="token punctuation">:</span> <span class="token string">'#ff6ac1'</span>
+    <span class="token key atrule">cyan</span><span class="token punctuation">:</span>    <span class="token string">'#9aedfe'</span>
+    <span class="token key atrule">white</span><span class="token punctuation">:</span>   <span class="token string">'#eff0eb'</span>
+</code></pre>
+<p>安装 <code>zsh</code></p>
+<pre class="language-autoit"><code class="language-autoit">$ sudo pacman <span class="token operator">-</span>S zsh
+</code></pre>
+<p>将 <code>zsh</code> 设置为默认的 Shell</p>
+<pre class="language-autoit"><code class="language-autoit">$ sudo chsh <span class="token operator">-</span>s <span class="token operator">/</span>bin<span class="token operator">/</span>zsh
+</code></pre>
+<p>安装 <code>oh-my-zsh</code> (需要安装 <code>curl</code> 包)</p>
+<pre class="language-autoit"><code class="language-autoit">$ sudo pacman <span class="token operator">-</span>S curl
+$ sh <span class="token operator">-</span>c <span class="token string">"$(curl -fsSL <a class="token url-link" href="https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh">https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh</a>)"</span>
+</code></pre>
+<p>其他安装方式参见 <a href="https://github.com/ohmyzsh/ohmyzsh">https://github.com/ohmyzsh/ohmyzsh</a></p>
+<h2 id="%E6%96%87%E4%BB%B6%E6%B5%8F%E8%A7%88%E5%99%A8%E9%85%8D%E7%BD%AE">文件浏览器配置<a class="anchor" href="#%E6%96%87%E4%BB%B6%E6%B5%8F%E8%A7%88%E5%99%A8%E9%85%8D%E7%BD%AE">§</a></h2>
+<p>安装 <code>ranger</code></p>
+<pre class="language-autoit"><code class="language-autoit">$ sudo pacman <span class="token operator">-</span>S ranger
+</code></pre>
+<p>使用以下命令在 <code>~/.config/ranger</code> 目录生成配置文件</p>
+<pre class="language-autoit"><code class="language-autoit">$ ranger <span class="token operator">-</span><span class="token operator">-</span>copy<span class="token operator">-</span>config<span class="token operator">=</span>all
+</code></pre>
+<p>安装 <code>ueberzug</code> 实现图片预览</p>
+<pre class="language-autoit"><code class="language-autoit">$ sudo pacman <span class="token operator">-</span>S ueberzug
+</code></pre>
+<p>安装 <code>highlight</code> 实现文件预览语法高亮</p>
+<pre class="language-autoit"><code class="language-autoit">$ sudo pacman <span class="token operator">-</span>S highlight
+</code></pre>
+<p>安装 <code>ranger</code> 的图标插件</p>
+<pre class="language-autoit"><code class="language-autoit">$ git clone https<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>alexanderjeurissen<span class="token operator">/</span>ranger_devicons ~<span class="token operator">/</span><span class="token punctuation">.</span>config<span class="token operator">/</span>ranger<span class="token operator">/</span>plugins<span class="token operator">/</span>ranger_devicons
+$ echo <span class="token string">"default_linemode devicons"</span> <span class="token operator">></span><span class="token operator">></span> <span class="token variable">$HOME</span><span class="token operator">/</span><span class="token punctuation">.</span>config<span class="token operator">/</span>ranger<span class="token operator">/</span>rc<span class="token punctuation">.</span>conf
+</code></pre>
+<p>编辑 <code>~/.config/ranger/rc.conf</code></p>
+<pre class="language-autoit"><code class="language-autoit"># 启用 git 状态显示
+set vcs_aware <span class="token boolean">true</span>
+# 启用图片预览
+set preview_images <span class="token boolean">true</span>
+set preview_images_method ueberzug
 </code></pre>
 <h2 id="%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE">中文输入法配置<a class="anchor" href="#%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE">§</a></h2>
 <p>安装 fcitx5</p>
@@ -249,13 +360,13 @@ fi
 <pre class="language-autoit"><code class="language-autoit">$ sudo pacman <span class="token operator">-</span>S fcitx5<span class="token operator">-</span>configtool
 </code></pre>
 <blockquote>
-<p>fcitx5 的配置文件位于 <code>～/.config/fcitx5</code>，如果有需要可以手动编辑。</p>
+<p>fcitx5 的配置文件位于 <code>~/.config/fcitx5</code>，如果有需要可以手动编辑。</p>
 </blockquote>
 <p>安装 fcitx5 的备选主题</p>
 <pre class="language-autoit"><code class="language-autoit">$ sudo pacman <span class="token operator">-</span>S fcitx5<span class="token operator">-</span>material<span class="token operator">-</span>color
 </code></pre>
 <p>安装完成后可以在 fcitx5 的图形化配置界面更改主题</p>
-<p>配置 fcitx5 环境变量，在 <code>～/pam_environment</code> 文件中添加以下内容</p>
+<p>配置 fcitx5 环境变量，在 <code>~/pam_environment</code> 文件中添加以下内容</p>
 <pre class="language-autoit"><code class="language-autoit">GTK_IM_MODULE <span class="token keyword">DEFAULT</span><span class="token operator">=</span>fcitx
 QT_IM_MODULE  <span class="token keyword">DEFAULT</span><span class="token operator">=</span>fcitx
 XMODIFIERS    <span class="token keyword">DEFAULT</span><span class="token operator">=</span>\<span class="token variable">@im</span><span class="token operator">=</span>fcitx
@@ -264,20 +375,13 @@ XMODIFIERS    <span class="token keyword">DEFAULT</span><span class="token opera
 <pre class="language-autoit"><code class="language-autoit">fcitx5 <span class="token operator">&amp;</span>
 sleep <span class="token number">2</span>
 </code></pre>
-<p><strong>fcitx5 在 IntelliJ 系列软件的 IDE 中会出现输入框位置不正确的错误，解决方式可参考以下链接</strong></p>
+<p><strong>fcitx5 在 IntelliJ 系列的 IDE 中会出现输入框位置不正确的错误，解决方式可参考以下链接</strong></p>
 <ul>
 <li><a href="https://bbs.archlinuxcn.org/viewtopic.php?pid=43982#p43982">fcitx输入法在Intellij IDEA开发工具中输入法候选框无法跟随光标</a></li>
 <li><a href="https://github.com/fcitx/fcitx5/issues/79">intellij 系列的 ide 中输入框位置不正确</a></li>
 </ul>
 <h2 id="%E8%BD%AF%E4%BB%B6%E5%8C%85">软件包<a class="anchor" href="#%E8%BD%AF%E4%BB%B6%E5%8C%85">§</a></h2>
-<p>以下为我自己在使用 Arch Linux 系统中常用的软件包</p>
-<h3 id="%E5%AD%97%E4%BD%93">字体<a class="anchor" href="#%E5%AD%97%E4%BD%93">§</a></h3>
-<ul>
-<li><strong>wqy-mircohei</strong></li>
-<li><strong>nerd-fonts-hack</strong></li>
-<li><strong>ttf-joypixels</strong></li>
-<li><strong>ttf-symbola</strong></li>
-</ul>
+<p>以下为博主使用 Arch Linux 时常用的软件包</p>
 <p><strong>终端相关</strong></p>
 <ul>
 <li><strong>alacritty</strong></li>
@@ -294,8 +398,11 @@ sleep <span class="token number">2</span>
 <li><strong>bc</strong></li>
 <li><strong>mdp</strong></li>
 <li><strong>ripgrep</strong></li>
+<li><strong>figlet</strong></li>
+<li><strong>lolcat</strong></li>
+<li><strong>tokei</strong></li>
 </ul>
-<h3 id="%E6%A1%8C%E9%9D%A2%E6%98%BE%E7%A4%BA">桌面显示<a class="anchor" href="#%E6%A1%8C%E9%9D%A2%E6%98%BE%E7%A4%BA">§</a></h3>
+<p><strong>桌面显示</strong></p>
 <ul>
 <li><strong>feh</strong></li>
 <li><strong>picom</strong></li>
@@ -317,10 +424,12 @@ sleep <span class="token number">2</span>
 </ul>
 <p><strong>其他</strong></p>
 <ul>
+<li><strong>mpd</strong></li>
+<li><strong>rofi</strong></li>
 <li><strong>screenkey</strong></li>
 <li><strong>albert</strong></li>
 <li><strong>aria2</strong></li>
 <li><strong>yay</strong></li>
 <li><strong>trayer</strong></li>
-</ul>
-<p>以上某些软件包需要配置，具体的配置方法可参考 <a href="https://github.com/geekya215/dotfiles">dotfiles</a></p></article></section><footer>Powered by <a href="https://github.com/xcatliu/pagic" target="_blank">Pagic</a></footer><script src="https://cdn.pagic.org/react@16.13.1/umd/react.production.min.js"></script><script src="https://cdn.pagic.org/react-dom@16.13.1/umd/react-dom.production.min.js"></script><script type="module" src="/index.js"></script></body></html>
+<li><strong>flameshot</strong></li>
+</ul></article></section><footer>Powered by <a href="https://github.com/xcatliu/pagic" target="_blank">Pagic</a></footer><script src="https://cdn.pagic.org/react@16.13.1/umd/react.production.min.js"></script><script src="https://cdn.pagic.org/react-dom@16.13.1/umd/react-dom.production.min.js"></script><script type="module" src="/index.js"></script></body></html>
