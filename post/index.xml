@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on geekya215</title><link>/post/</link><description>Recent content in Posts on geekya215</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 19 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Arch Linux 完全指北</title><link>/post/7a1aa3e3/</link><pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate><guid>/post/7a1aa3e3/</guid><description>此文为博主自身在安装 Arch Linux 过程中的总结。主要参考 Arch Wiki，本文章具有一定时效性，里面的内容可能在以后的某个时间失效。如果遇到错误，请参考最新版本的官方文档，或通过网络寻求帮助。
+本文系统使用 UEFI 模式启动，禁用 Secure Boot。
+安装前准备 下载安装镜像，推荐使用国内清华大学镜像站（TUNA），也可以通过 Arch 官方下载页面，选择最符合自己网络状况的镜像站。 下载完毕后，需要将镜像文件刻录至U盘中，Linux 下可以使用 dd 命令完成，Windows 平台下推荐使用 Rufus。 开始安装 插入刚刚完成刻录的U盘，在开机时选择从U盘启动。通过 Arch 的引导界面进入 Live 环境。
+网络检查 进入环境后，检查网络接口
+# ip link 有线网络默认是连接状态，无线网络默认是未连接状态，需要通过 iwd 来连接
+使用 iwctl 进入交互环境后可以通过 help 命令来获得帮助
+完成网络配置后，使用 ping 命令检查网络是否连接成功
+# ping www.baidu.com 同步系统时间 更新系统时钟
+# timedatectl set-ntp true 完成设置后可以使用如下命令查看服务状态
+# timedatectl status 分区格式化及挂载 查看系统磁盘当前状态
+# fdisk -l 或者
+# lsblk 如果硬盘被成功识别，会出现 /dev/sda， /dev/nvme0n1 之类的硬盘设备文件。这里假设硬盘设备为 /dev/sda。采用最基本的分区方式。</description></item></channel></rss>

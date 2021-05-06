@@ -1,0 +1,142 @@
+<!doctype html><html lang=zh-cn><head><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script><script>hljs.initHighlightingOnLoad()</script><script>document.addEventListener('DOMContentLoaded',a=>{document.querySelectorAll('pre code').forEach(a=>{hljs.highlightBlock(a)})})</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.13.6/dist/katex.min.css integrity=sha384-81hI3kRV62VEhJBKVz7JsJzaUcP5Ty/E1FFdkLh6yz8uWthgdssaWCD1j8R1r2iU crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.13.6/dist/katex.min.js integrity=sha384-8swauRFcjK634lyiWVXOA0GdycMCzfbC+6qXGQroVKYve7SFHawYjryBtaLve4xl crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.13.6/dist/contrib/auto-render.min.js integrity=sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl crossorigin=anonymous onload=renderMathInElement(document.body)></script><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/images/favicon-16x16.png><link rel=manifest href=/images/site.webmanifest><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Geekya215's blog"><title>Arch Linux 完全指北 | geekya215</title><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/blurrylight/blurrylight_blog@pages-src/themes/hugo-classic/static/css/style.css><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/blurrylight/blurrylight_blog@pages-src/themes/hugo-classic/static/css/fonts.css><link rel=stylesheet href=/css/theme-override.css><header><nav><ul><li class=pull-left><a href=/>~/home</a></li><li class=pull-left><a href=/about/>~/about me</a></li></ul></nav></header></head><body><br><div class=article-meta><h1><span class=title>Arch Linux 完全指北</span></h1><h2 class=date>2021/01/19</h2><p class=terms></p></div><div class=content-wrapper><main><p>此文为博主自身在安装 Arch Linux 过程中的总结。主要参考 <a href=https://wiki.archlinux.org/>Arch Wiki</a>，本文章具有一定时效性，里面的内容可能在以后的某个时间失效。如果遇到错误，请参考最新版本的官方文档，或通过网络寻求帮助。</p><p><strong>本文系统使用 UEFI 模式启动，禁用 Secure Boot。</strong></p><h2 id=安装前准备>安装前准备</h2><ul><li>下载安装镜像，推荐使用国内清华大学镜像站（<a href=https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/>TUNA</a>），也可以通过 <a href=https://archlinux.org/download/>Arch 官方下载页面</a>，选择最符合自己网络状况的镜像站。</li><li>下载完毕后，需要将镜像文件刻录至U盘中，Linux 下可以使用 <code>dd</code> 命令完成，Windows 平台下推荐使用 <a href=https://rufus.ie/>Rufus</a>。</li></ul><h2 id=开始安装>开始安装</h2><p>插入刚刚完成刻录的U盘，在开机时选择从U盘启动。通过 Arch 的引导界面进入 Live 环境。</p><h3 id=网络检查>网络检查</h3><p>进入环境后，检查网络接口</p><pre><code># ip link
+</code></pre><p>有线网络默认是连接状态，无线网络默认是未连接状态，需要通过 <code>iwd</code> 来连接</p><blockquote><p>使用 <code>iwctl</code> 进入交互环境后可以通过 <code>help</code> 命令来获得帮助</p></blockquote><p>完成网络配置后，使用 <code>ping</code> 命令检查网络是否连接成功</p><pre><code># ping www.baidu.com
+</code></pre><h3 id=同步系统时间>同步系统时间</h3><p>更新系统时钟</p><pre><code># timedatectl set-ntp true
+</code></pre><p>完成设置后可以使用如下命令查看服务状态</p><pre><code># timedatectl status
+</code></pre><h3 id=分区格式化及挂载>分区格式化及挂载</h3><p>查看系统磁盘当前状态</p><pre><code># fdisk -l
+</code></pre><p>或者</p><pre><code># lsblk
+</code></pre><p>如果硬盘被成功识别，会出现 <code>/dev/sda</code>， <code>/dev/nvme0n1</code> 之类的硬盘设备文件。这里假设硬盘设备为 <code>/dev/sda</code>。采用最基本的分区方式。</p><p>使用 <code>cfdisk</code> 命令进行分区，也可使用 <code>parted</code>，根据个人喜好选择。</p><pre><code># cfdisk /dev/sda
+</code></pre><p>分区方式如下：</p><table><thead><tr><th>分区类型</th><th>分区</th><th>分区大小</th></tr></thead><tbody><tr><td>efi分区</td><td>/dev/sda1</td><td>512M</td></tr><tr><td>swap分区</td><td>/dev/sda2</td><td>实际内存大小</td></tr><tr><td>root分区</td><td>/dev/sda3</td><td>磁盘剩余空间</td></tr></tbody></table><p>格式化分区</p><pre><code># mkfs.vfat -F32 /dev/sda1
+# mkfs.swap /dev/sda2
+# swapon /dev/sda2
+# mkfs.ext4 /dev/sda3
+</code></pre><p>挂载格式化完成的分区</p><pre><code># mount /dev/sda3 /mnt
+# mkdir /mnt/boot
+# mount /dev/sda1 /mnt/boot
+</code></pre><p>挂载完毕后可以使用 <code>df</code> 命令查看挂载是否正确</p><h3 id=更改镜像源>更改镜像源</h3><p>查看 <code>/etc/pacman.d/mirrorlist</code> 文件，将最符合当前网络状况的镜像网址放在列表的最前。</p><h3 id=安装系统>安装系统</h3><pre><code># pacstrap /mnt base linux linux-firmware
+</code></pre><h3 id=配置系统>配置系统</h3><p>生成 fstab 文件</p><pre><code># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+</code></pre><p>查看生成的 fstab 文件是否正确</p><pre><code># cat /mnt/etc/fstab
+</code></pre><p>进入新安装的系统环境</p><pre><code># arch-chroot /mnt
+</code></pre><blockquote><p>因为后面有些配置需要操作文本，这里可以先安装 vim 方便后面编辑</p></blockquote><p>设置时区</p><pre><code># ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</code></pre><p>生成 <code>/etc/adjtime</code></p><pre><code># hwclock --systohc
+</code></pre><p>编辑 <code>/etc/locale.gen</code>，去掉 <code>en_US.UTF-8 UTF-8</code> 这一行的注释。</p><blockquote><p>因为使用中文字体会导致 tty 出现错误，这里只使用英文字体</p></blockquote><p>生成 locale 信息</p><pre><code># locale-gen
+</code></pre><p>创建 <code>/etc/locale.conf</code> 并在文件中加入 <code>LANG=en_US.UTF-8</code></p><h3 id=网络配置>网络配置</h3><p>设置主机名</p><pre><code># echo hostname &gt;&gt; /etc/hostname
+</code></pre><p>创建 <code>/etc/hosts</code> 并加入以下内容</p><pre><code>127.0.0.1	localhost
+::1		localhost
+127.0.1.1	myhostname.localdomain	myhostname
+</code></pre><p>安装 <code>dhcpcd</code> 并启用</p><pre><code># pacman -S dhcpcd
+# systemctl enable dhcpcd
+# systemctl start dhcpcd
+</code></pre><p>如果使用无线网络需要额外安装 <code>iwd</code></p><pre><code># pacman -S iwd
+</code></pre><h3 id=引导配置>引导配置</h3><p>安装引导工具包以及 CPU 微码。微码需要根据自己使用的 CPU 来选择。Intel 用户安装 <code>intel-ucode</code>，AMD 用户安装 <code>amd-ucode</code>。</p><pre><code># pacman -S grub efibootmgr
+# pacman -S amd-ucode
+</code></pre><p>安装 GRUB</p><pre><code># grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+</code></pre><blockquote><p>如果在已有 Windows 系统创建双系统引导需要增加完成以下步骤，单系统安装请忽略此段</p><p>安装 <code>os-prober</code></p><pre><code># pacman -S os-prober
+</code></pre><p>创建一个临时的挂载分区并将 Windows EFI 分区挂载1</p><pre><code># mkdir /mnt2
+# mount /dev/sdaX /mnt2
+</code></pre><p>启动 <code>os-prober</code></p></blockquote><p>生成主配置文件</p><pre><code># grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre><h3 id=杂项>杂项</h3><p>给 root 用户设置密码以便重启后登陆</p><pre><code># passwd
+</code></pre><p>退出 chroot 环境</p><pre><code># exit
+</code></pre><p>卸载挂载的分区</p><pre><code># umount -R /mnt
+</code></pre><p>重启系统</p><pre><code># reboot
+</code></pre><h2 id=新系统的基本配置>新系统的基本配置</h2><p>重启完成后使用 root 账户和刚刚设置的密码进入系统，首先通过 <code>ping</code> 命令测试网络是否已连接，如果未能连接，查看 <code>dhcpcd</code> 的服务是否正常运行。</p><p>更新软件仓库</p><pre><code># pacman -Syyu
+</code></pre><h3 id=配置-archlinuxcn-仓库>配置 Archlinuxcn 仓库</h3><p>在 <code>/etc/pacman.conf</code> 文件底部加入以下内容</p><pre><code>[archlinuxcn]
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+</code></pre><p>刷新软件仓库并安装 <code>archlinuxcn-keyring</code> 导入 <code>GPG-key</code></p><pre><code># pacman -Syyu
+# pacman -S archlinux-keyring
+</code></pre><h3 id=用户以及权限配置>用户以及权限配置</h3><p>添加用户</p><pre><code># useradd -m -G wheel username
+</code></pre><p>设置用户的密码</p><pre><code># passwd username
+</code></pre><p>安装 <code>sudo</code> 并使用 <code>visudo</code> 命令编辑 <code>/etc/sudoers</code> 文件，由于 <code>visudo</code> 命令默认使用的是 <code>vi</code> 来编辑，而系统中没有安装 <code>vi</code>，可以使用如下命令来指定 <code>visudo</code> 命令启动的编辑器</p><pre><code># EDITOR=vim visudo
+</code></pre><p>此时会使用 <code>vim</code> 打开 <code>/etc/sudoers</code> 文件，需要将 <code># %whell ALL=(ALL)</code> 这一行取消注释</p><blockquote><p>建议不要直接编辑 <code>sudoers</code> 文件，使用 <code>visudo</code> 命令完成编辑退出时会自动检测文件的格式，确保 <code>sudo</code> 命令能够正常运行，否则可能会导致不可预料的错误。</p></blockquote><p>退出 root 账户，使用新创建的账户进入系统。</p><h2 id=字体配置>字体配置</h2><p>由于后面有些软件需要字体支持这里先统一安装</p><ul><li><code>wqy-mircohei</code> - 中文字体支持</li><li><code>nerd-fonts-hack</code> - 图标字体支持</li><li><code>ttf-joypixels</code>， <code>ttf-symbola</code> - Neovim 某些插件特殊图标支持</li></ul><h2 id=图形环境配置>图形环境配置</h2><p>安装 Xorg 相关组件</p><pre><code>$ sudo pacman -S xorg
+</code></pre><blockquote><p>这里采用默认安装，可能会安装一些不需要的包，可根据自身需要精简。</p></blockquote><p>安装相应的显卡驱动，根据显卡型号选择，AMD 安装 <code>xf86-video-amdgpu</code>，Nvidia 安装 <code>nvidia</code></p><pre><code>$ sudo pacman -S nvidia
+</code></pre><p>这里使用 Suckless 的窗口管理器 <a href=https://dwm.suckless.org/>dwm</a>，由于需要编译，安装必要的工具链。</p><pre><code>$ sudo pacman -S make gcc pkg-config libxft git
+</code></pre><p>从 Suckless 官网克隆 dwm 的最新源码</p><pre><code>$ git clone https://git.suckless.org/dwm
+</code></pre><p>进入 dwm 目录，由于不需要多屏幕支持，将 <code>config.mk</code> 文件中以下几行注释掉</p><pre><code>XINERAMALIBS  = -lXinerama
+XINERAMAFLAGS = -DXINERAMA
+</code></pre><p>dwm 默认只提供最基本的功能，推荐使用以下 patch 获取更好的用户体验</p><ul><li><strong><a href=https://dwm.suckless.org/patches/alpha/>alpha</a></strong> - 使状态栏拥有透明效果</li><li><strong><a href=https://dwm.suckless.org/patches/autostart/>autostart</a></strong> - dwm 启动时可以运行用户自定义的脚本</li><li><strong><a href=https://dwm.suckless.org/patches/awesomebar/>awesomebar</a></strong> - 让任务栏拥有类似 awesome 的功能</li><li><strong><a href=https://dwm.suckless.org/patches/fullscreen/>fullscreen</a></strong> - 使窗口拥有全屏功能</li><li><strong><a href=https://dwm.suckless.org/patches/hide_vacant_tags/>hide vacant tags</a></strong> - 隐藏空标签</li><li><strong><a href=https://dwm.suckless.org/patches/noborder/>noborder</a></strong> - 当前面屏幕只有一个窗口时隐藏边界</li><li><strong><a href=https://dwm.suckless.org/patches/pertag/>pertag</a></strong> - 使不同标签下的窗口拥有不同的布局方式</li><li><strong><a href=https://dwm.suckless.org/patches/vanitygaps/>vanitygaps</a></strong> - 让窗口拥有类似 i3-gaps 的功能</li></ul><p>编译源码完成安装</p><pre><code>$ sudo make &amp;&amp; make clean install
+</code></pre><p>编辑 <code>～/.xinitrc</code> 加入以下内容</p><pre><code>exec dwm
+</code></pre><p>如果希望登陆时自动 X，可以采用以下方式</p><ul><li>如果使用 Bash，编辑 <code>~/.bash_profile</code></li><li>如果使用 zsh，编辑 <code>~/.zprofile</code></li></ul><p>加入以下内容</p><pre><code>if [[ ! $DISPLAY &amp;&amp; $XDG_VTNR -eq 1 ]]; then
+  exec startx
+fi
+</code></pre><p>启动 X</p><pre><code>$ startx
+</code></pre><pre><code>#include&lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  return 0;
+}
+</code></pre><h2 id=终端配置>终端配置</h2><p>使用 <code>alacritty</code> 作为默认终端</p><pre><code>$ sudo pacman -S alacritty
+</code></pre><p>配置文件模板位于 <code>/usr/share/doc/alacritty/example/alacritty.yml</code>， 可将其复制到 <code>~/.config/alacritty/alacritty.yml</code> 进行个性化配置</p><p>对文件中以下几处进行修改</p><pre><code># 启用真彩色
+env:
+  TREM: xterm-256color
+
+# 使用 Hack Nerd Font 作为终端字体
+font:
+  normal:
+    family: Hack Nerd Font
+    style: Regular
+
+# 配色使用 Snazzy 主题
+draw_bold_text_with_bright_colors: true
+
+colors:
+
+  primary:
+    background: '#282a36'
+    foreground: '#eff0eb'
+
+  cursor:
+    cursor: '#97979b'
+
+  selection:
+    text:       '#282a36'
+    background: '#feffff'
+
+  normal:
+    black:   '#282a36'
+    red:     '#ff5c57'
+    green:   '#5af78e'
+    yellow:  '#f3f99d'
+    blue:    '#57c7ff'
+    magenta: '#ff6ac1'
+    cyan:    '#9aedfe'
+    white:   '#f1f1f0'
+
+  bright:
+    black:   '#686868'
+    red:     '#ff5c57'
+    green:   '#5af78e'
+    yellow:  '#f3f99d'
+    blue:    '#57c7ff'
+    magenta: '#ff6ac1'
+    cyan:    '#9aedfe'
+    white:   '#eff0eb'
+</code></pre><p>安装 <code>zsh</code></p><pre><code>$ sudo pacman -S zsh
+</code></pre><p>将 <code>zsh</code> 设置为默认的 Shell</p><pre><code>$ sudo chsh -s /bin/zsh
+</code></pre><p>安装 <code>oh-my-zsh</code> (需要安装 <code>curl</code> 包)</p><pre><code>$ sudo pacman -S curl
+$ sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;
+</code></pre><p>其他安装方式参见 <a href=https://github.com/ohmyzsh/ohmyzsh>https://github.com/ohmyzsh/ohmyzsh</a></p><h2 id=文件浏览器配置>文件浏览器配置</h2><p>安装 <code>ranger</code></p><pre><code>$ sudo pacman -S ranger
+</code></pre><p>使用以下命令在 <code>~/.config/ranger</code> 目录生成配置文件</p><pre><code>$ ranger --copy-config=all
+</code></pre><p>安装 <code>ueberzug</code> 实现图片预览</p><pre><code>$ sudo pacman -S ueberzug
+</code></pre><p>安装 <code>highlight</code> 实现文件预览语法高亮</p><pre><code>$ sudo pacman -S highlight
+</code></pre><p>安装 <code>ranger</code> 的图标插件</p><pre><code>$ git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+$ echo &quot;default_linemode devicons&quot; &gt;&gt; $HOME/.config/ranger/rc.conf
+</code></pre><p>编辑 <code>~/.config/ranger/rc.conf</code></p><pre><code class=language-conf data-lang=conf># 启用 git 状态显示
+set vcs_aware true
+# 启用图片预览
+set preview_images true
+set preview_images_method ueberzug
+</code></pre><h2 id=中文输入法配置>中文输入法配置</h2><p>安装 fcitx5</p><pre><code>$ sudo pacman -S fcitx5
+</code></pre><p>安装中文输入法引擎</p><pre><code>$ sudo pacman -S fcitx5-chinese-addons
+</code></pre><p>如果需要支持 Qt 或 GTK 程序，需要额外安装以下包</p><pre><code>$ sudo pacman -S fcitx5-qt fcitx5-gtk
+</code></pre><p>添加中文词库</p><pre><code>$ sudo pacman -S fcitx5-pinyin-zhwiki fcitx5-pinyin-moegirl
+</code></pre><p>安装 fcitx5 GUI 客户端配置工具</p><pre><code>$ sudo pacman -S fcitx5-configtool
+</code></pre><blockquote><p>fcitx5 的配置文件位于 <code>~/.config/fcitx5</code>，如果有需要可以手动编辑。</p></blockquote><p>安装 fcitx5 的备选主题</p><pre><code>$ sudo pacman -S fcitx5-material-color
+</code></pre><p>安装完成后可以在 fcitx5 的图形化配置界面更改主题</p><p>配置 fcitx5 环境变量，在 <code>~/pam_environment</code> 文件中添加以下内容</p><pre><code>GTK_IM_MODULE DEFAULT=fcitx
+QT_IM_MODULE  DEFAULT=fcitx
+XMODIFIERS    DEFAULT=\@im=fcitx
+</code></pre><p>将 fcitx5 设置为随 X 一起启动，在 <code>~/.xinitrc</code> 中添加以下内容</p><pre><code>fcitx5 &amp;
+sleep 2
+</code></pre><p><strong>fcitx5 在 IntelliJ 系列的 IDE 中会出现输入框位置不正确的错误，解决方式可参考以下链接</strong></p><ul><li><a href="https://bbs.archlinuxcn.org/viewtopic.php?pid=43982#p43982">fcitx输入法在Intellij IDEA开发工具中输入法候选框无法跟随光标</a></li><li><a href=https://github.com/fcitx/fcitx5/issues/79>intellij 系列的 ide 中输入框位置不正确</a></li></ul><h2 id=软件包>软件包</h2><p>以下为博主使用 Arch Linux 时常用的软件包</p><p><strong>终端相关</strong></p><ul><li><strong>alacritty</strong></li><li><strong>ranger</strong></li><li><strong>lazygit</strong></li><li><strong>lazydocker</strong></li><li><strong>neofetch</strong></li><li><strong>htop</strong></li><li><strong>mosh</strong></li><li><strong>tmux</strong></li><li><strong>ueberzug</strong></li><li><strong>highlight</strong></li><li><strong>fzf</strong></li><li><strong>bc</strong></li><li><strong>mdp</strong></li><li><strong>ripgrep</strong></li><li><strong>figlet</strong></li><li><strong>lolcat</strong></li><li><strong>tokei</strong></li></ul><p><strong>桌面显示</strong></p><ul><li><strong>feh</strong></li><li><strong>picom</strong></li></ul><p><strong>编辑器</strong></p><ul><li><strong>neovim</strong></li><li><strong>emacs</strong></li></ul><p><strong>科学上网</strong></p><ul><li><strong>clash</strong></li><li><strong>proxychians-ng</strong></li></ul><p><strong>聊天工具</strong></p><ul><li><strong>telegram</strong></li><li><strong>discord</strong></li></ul><p><strong>其他</strong></p><ul><li><strong>mpd</strong></li><li><strong>rofi</strong></li><li><strong>screenkey</strong></li><li><strong>albert</strong></li><li><strong>aria2</strong></li><li><strong>yay</strong></li><li><strong>trayer</strong></li><li><strong>flameshot</strong></li></ul></main></div><footer><nav class=post-nav><span class=nav-prev></span><span class=nav-next></span></nav><script type=text/javascript>document.addEventListener('keyup',function(a){if(a.target.nodeName.toUpperCase()!='BODY')return;var b=!1;a.which==37||a.which==39,b&&(window.location=b)})</script><script>(function(){var b,a;function c(e){var c=document.getElementsByTagName(e),b,d,a;for(b=0;b<c.length;b++)if(d=c[b],a=d.parentElement,a.childNodes.length===1){if(a.nodeName==='A')if(a=a.parentElement,a.childNodes.length!=1)continue;a.nodeName==='P'&&(a.style.textAlign='center')}}b=['img','embed','object'];for(a=0;a<b.length;a++)c(b[a])})()</script><script>var mybutton=document.getElementById("topBtn");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>20||document.documentElement.scrollTop>20?mybutton.style.display="block":mybutton.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}</script><hr>© 2021 <a href=https://github.com/geekya215>geekya215</a>. All rights reserved.</footer></body></html>
