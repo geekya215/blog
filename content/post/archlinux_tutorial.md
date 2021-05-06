@@ -1,13 +1,8 @@
 ---
+title: Arch Linux 完全指北
 date: 2021-01-19
-categories:
-  - Linux
-tags:
-  - 总结思考
-author: geekya215
+slug: "7a1aa3e3"
 ---
-
-# Arch Linux 完全指北
 
 此文为博主自身在安装 Arch Linux 过程中的总结。主要参考 [Arch Wiki](https://wiki.archlinux.org/)，本文章具有一定时效性，里面的内容可能在以后的某个时间失效。如果遇到错误，请参考最新版本的官方文档，或通过网络寻求帮助。
 
@@ -342,6 +337,17 @@ fi
 ```
 $ startx
 ```
+~~~
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  return 0;
+}
+~~~
 
 ## 终端配置
 
@@ -352,7 +358,7 @@ $ sudo pacman -S alacritty
 配置文件模板位于 `/usr/share/doc/alacritty/example/alacritty.yml`， 可将其复制到 `~/.config/alacritty/alacritty.yml` 进行个性化配置
 
 对文件中以下几处进行修改
-```yaml
+```
 # 启用真彩色
 env:
   TREM: xterm-256color
@@ -554,3 +560,4 @@ sleep 2
 - **yay**
 - **trayer**
 - **flameshot**
+

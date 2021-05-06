@@ -1,31 +1,28 @@
-name: gh-pages
+name: github pages
 
 on:
   push:
     branches:
-      - master
+      - master  # Set a branch to deploy
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Setup deno
-        uses: denolib/setup-deno@v2
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          deno-version: v1.6.0
+          hugo-version: 'latest'
 
-      - name: Build gh-pages
-        run: |
-          deno --version
-          deno install --unstable --allow-read --allow-write --allow-net --allow-run -n pagic https://deno.land/x/pagic@v1.0.0/mod.ts
-          pagic build
-      - name: Deploy gh-pages
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          cname: www.geekya215.top
+          publish_dir: ./public

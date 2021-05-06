@@ -1,0 +1,26 @@
+baseurl = "/"
+languageCode = "zh-CN"
+title = "geekya215"
+theme = "hugo-classic"
+ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
+enableEmoji = true
+footnotereturnlinkcontents = "↩"
+
+[permalinks]
+    post = "/post/:slug/"
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "About me"
+    url = "/about/"
+    weight = 2
+
+[params]
+    description = "Geekya215's blog"
+    footer = "© 2021 [geekya215](https://github.com/geekya215). All rights reserved."
+    custom_css = ["css/theme-override.css"]
+

@@ -1,0 +1,82 @@
+<!-- Automagically centers images. Original Author Yihui Xie: https://yihui.name -->
+{{ if .Section }}
+<nav class="post-nav">
+  <span class="nav-prev">{{ with .PrevInSection }}&larr; <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}</span>
+  <span class="nav-next">{{ with .NextInSection }}<a href="{{ .RelPermalink }}">{{ .Title }}</a> &rarr;{{ end }}</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  // Left arrow
+    {{ if .PrevInSection }}
+    url = '{{ .PrevInSection.RelPermalink }}';
+    {{ end }}
+  } else if (e.which == 39) {  // Right arrow
+    {{ if .NextInSection }}
+    url = '{{ .NextInSection.RelPermalink }}';
+    {{ end }}
+  }
+  if (url) window.location = url;
+});
+</script>
+{{ end }}
+
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      // center an image if it is the only element of its parent
+      if (parent.childNodes.length === 1) {
+        // if there is a link on image, check grandparent
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+{{ if and (not .IsHome) (.Site.Params.utter.enable) }}
+    <script src="https://utteranc.es/client.js"
+        repo= '{{ .Site.Params.utter.repo }}'
+        issue-term= "{{ .Site.Params.utter.issueTerm }}"
+        theme= '{{ .Site.Params.utter.theme }}'
+        crossorigin= "anonymous"
+        async>
+    </script>
+{{ end }}
+
+
+<!-- TopBtn -->
+<script>
+var mybutton = document.getElementById("topBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
