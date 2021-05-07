@@ -58,15 +58,6 @@ XINERAMAFLAGS = -DXINERAMA
   exec startx
 fi
 </code></pre><p>启动 X</p><pre><code>$ startx
-</code></pre><pre><code>#include&lt;bits/stdc++.h&gt;
-
-using namespace std;
-
-int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
-  return 0;
-}
 </code></pre><h2 id=终端配置>终端配置</h2><p>使用 <code>alacritty</code> 作为默认终端</p><pre><code>$ sudo pacman -S alacritty
 </code></pre><p>配置文件模板位于 <code>/usr/share/doc/alacritty/example/alacritty.yml</code>， 可将其复制到 <code>~/.config/alacritty/alacritty.yml</code> 进行个性化配置</p><p>对文件中以下几处进行修改</p><pre><code># 启用真彩色
 env:
